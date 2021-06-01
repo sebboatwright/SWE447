@@ -13,12 +13,12 @@
 <script id="Cube-vertex-shader" type="x-shader/x-vertex">
   attribute vec4 vPosition;
 
-  // uniform mat4 MV;
+  uniform mat4 MV;
 
   void main()
   {
       gl_PointSize = 5.0;
-      gl_Position = vPosition;
+      gl_Position = MV * vPosition;
   }
 </script>
 

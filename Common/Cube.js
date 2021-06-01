@@ -85,7 +85,7 @@ function Cube( vertexShaderId, fragmentShaderId ) {
  
         gl.bindBuffer( gl.ELEMENT_ARRAY_BUFFER, this.indices.buffer );
 
-        //gl.uniformMatrix4fv( MVLoc, gl.FALSE, flatten(this.MV) );
+        gl.uniformMatrix4fv( MVLoc, gl.FALSE, flatten(this.MV) );
 
         // Draw the cube's base
         gl.drawElements( gl.TRIANGLES, this.indices.count, gl.UNSIGNED_SHORT, 0 );
