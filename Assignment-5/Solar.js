@@ -127,7 +127,7 @@ function render() {
   // "planet" variable is set for each object, you will need to set this
   // for each planet separately.
 
-  planet.PointMode = true;
+  planet.PointMode = false;
 
   // Use the matrix stack to configure and render a planet.  How you rener
   // each planet will be similar, but not exactly the same.  In particular,
@@ -135,7 +135,7 @@ function render() {
   // system (and hence, has no translation to its location).
 
   ms.push();
-  ms.scale(data.radius);
+  ms.scale((data.radius) / 5);  // Sun has to be smaller so it fits on the screen
   gl.useProgram(planet.program);
   gl.uniformMatrix4fv(planet.uniforms.MV, false, flatten(ms.current()));
   gl.uniformMatrix4fv(planet.uniforms.P, false, flatten(P));
@@ -155,9 +155,9 @@ function render() {
   planet.PointMode = false;
 
   ms.push();
-  ms.rotate((time / data.year), [0, 0, 1]);
-  ms.translate((data.distance), 0, 0);
-  ms.scale(data.radius);
+  ms.rotate((time / data.year) * 5, [0, 1, 0]);
+  ms.translate((data.distance * 3) + (109.298 / 4), 0, 0);
+  ms.scale(data.radius / 2);
 
   gl.useProgram(planet.program);
   gl.uniformMatrix4fv(planet.uniforms.MV, false, flatten(ms.current()));
@@ -176,9 +176,9 @@ function render() {
   planet.PointMode = false;
 
   ms.push();
-  ms.rotate((time / data.year), [0, 0, 1]);
-  ms.translate((data.distance), 0, 0);
-  ms.scale(data.radius);
+  ms.rotate((time / data.year) * 5, [0, 1, 0]);
+  ms.translate((data.distance * 3) + (109.298 / 4), 0, 0);
+  ms.scale(data.radius / 2);
 
   gl.useProgram(planet.program);
   gl.uniformMatrix4fv(planet.uniforms.MV, false, flatten(ms.current()));
@@ -197,13 +197,13 @@ function render() {
   planet.PointMode = false;
 
   ms.push();
-  ms.rotate((time / data.year), [0, 0, 1]);
-  ms.translate((data.distance), 0, 0);
+  ms.rotate((time / data.year) * 5, [0, 1, 0]);
+  ms.translate((data.distance * 3) + (109.298 / 4), 0, 0);
 
   ms.push();  // Moon
 
-  ms.rotate(((data.year * 365) * time), [0, 0, 1]);
-  ms.scale(data.radius);
+  ms.rotate(((data.year * 365) * time), [0, 1, 0]);
+  ms.scale(data.radius / 2);
 
   gl.useProgram(planet.program);
   gl.uniformMatrix4fv(planet.uniforms.MV, false, flatten(ms.current()));
@@ -221,9 +221,9 @@ function render() {
 
   planet.PointMode = false;
 
-  ms.rotate(((data.year * 365) * time), [0, 0, 1]); // Rotate around Earth
+  ms.rotate(((data.year * 365) * time), [0, 1, 0]); // Rotate around Earth
   ms.translate((data.distance * 500), 0, 0); // Distance from Earth x500, otherwise the Moon would be behind the Earth
-  ms.scale(data.radius);
+  ms.scale(data.radius / 2);
 
   gl.useProgram(planet.program);
   gl.uniformMatrix4fv(planet.uniforms.MV, false, flatten(ms.current()));
@@ -242,9 +242,9 @@ function render() {
   planet.PointMode = false;
 
   ms.push();
-  ms.rotate((time / data.year), [0, 0, 1]);
-  ms.translate((data.distance), 0, 0);
-  ms.scale(data.radius);
+  ms.rotate((time / data.year * 5), [0, 1, 0]);
+  ms.translate((data.distance * 3) + (109.298 / 4), 0, 0);
+  ms.scale(data.radius / 2);
 
   gl.useProgram(planet.program);
   gl.uniformMatrix4fv(planet.uniforms.MV, false, flatten(ms.current()));
@@ -260,12 +260,12 @@ function render() {
   planet = Planets[name];
   data = SolarSystem[name];
 
-  planet.PointMode = false;
+  planet.PointMode = true;
 
   ms.push();
-  ms.rotate((time / data.year), [0, 0, 1]);
-  ms.translate((data.distance), 0, 0);
-  ms.scale(data.radius);
+  ms.rotate((time / data.year) * 5, [0, 1, 0]);
+  ms.translate((data.distance * 3) + (109.298 / 4), 0, 0);
+  ms.scale(data.radius / 2);
 
   gl.useProgram(planet.program);
   gl.uniformMatrix4fv(planet.uniforms.MV, false, flatten(ms.current()));
@@ -284,9 +284,9 @@ function render() {
   planet.PointMode = false;
 
   ms.push();
-  ms.rotate((time / data.year), [0, 0, 1]);
-  ms.translate((data.distance), 0, 0);
-  ms.scale(data.radius);
+  ms.rotate((time / data.year) * 5, [0, 1, 0]);
+  ms.translate((data.distance * 3) + (109.298 / 4), 0, 0);
+  ms.scale(data.radius / 2);
 
   gl.useProgram(planet.program);
   gl.uniformMatrix4fv(planet.uniforms.MV, false, flatten(ms.current()));
@@ -305,9 +305,9 @@ function render() {
   planet.PointMode = false;
 
   ms.push();
-  ms.rotate((time / data.year), [0, 0, 1]);
-  ms.translate((data.distance), 0, 0);
-  ms.scale(data.radius);
+  ms.rotate((time / data.year) * 5, [0, 1, 0]);
+  ms.translate((data.distance * 3) + (109.298 / 4), 0, 0);
+  ms.scale(data.radius / 2);
 
   gl.useProgram(planet.program);
   gl.uniformMatrix4fv(planet.uniforms.MV, false, flatten(ms.current()));
@@ -326,9 +326,9 @@ function render() {
   planet.PointMode = false;
 
   ms.push();
-  ms.rotate((time / data.year), [0, 0, 1]);
-  ms.translate((data.distance), 0, 0);
-  ms.scale(data.radius);
+  ms.rotate((time / data.year) * 5, [0, 1, 0]);
+  ms.translate((data.distance * 3) + (109.298 / 4), 0, 0);
+  ms.scale(data.radius / 2);
 
   gl.useProgram(planet.program);
   gl.uniformMatrix4fv(planet.uniforms.MV, false, flatten(ms.current()));
@@ -347,9 +347,9 @@ function render() {
   planet.PointMode = false;
 
   ms.push();
-  ms.rotate((time / data.year), [0, 0, 1]);
-  ms.translate((data.distance), 0, 0);
-  ms.scale(data.radius);
+  ms.rotate((time / data.year) * 5, [0, 1, 0]);
+  ms.translate((data.distance * 3) + (109.298 / 4), 0, 0);
+  ms.scale(data.radius / 2);
 
   gl.useProgram(planet.program);
   gl.uniformMatrix4fv(planet.uniforms.MV, false, flatten(ms.current()));
@@ -373,7 +373,7 @@ function resize() {
 
   gl.viewport(0, 0, w, h);
 
-  var fovy = 120.0; // degrees
+  var fovy = 125.0; // degrees
   var aspect = w / h;
 
   P = perspective(fovy, aspect, near, far);
