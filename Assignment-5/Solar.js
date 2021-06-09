@@ -135,7 +135,7 @@ function render() {
   // system (and hence, has no translation to its location).
 
   ms.push();
-  ms.scale(data.radius / 2);
+  ms.scale(data.radius);
   gl.useProgram(planet.program);
   gl.uniformMatrix4fv(planet.uniforms.MV, false, flatten(ms.current()));
   gl.uniformMatrix4fv(planet.uniforms.P, false, flatten(P));
@@ -156,8 +156,8 @@ function render() {
 
   ms.push();
   ms.rotate((time / data.year), [0, 0, 1]);
-  ms.translate((data.distance * 10), 0, 0);
-  ms.scale(data.radius / 2);
+  ms.translate((data.distance), 0, 0);
+  ms.scale(data.radius);
 
   gl.useProgram(planet.program);
   gl.uniformMatrix4fv(planet.uniforms.MV, false, flatten(ms.current()));
@@ -177,8 +177,8 @@ function render() {
 
   ms.push();
   ms.rotate((time / data.year), [0, 0, 1]);
-  ms.translate((data.distance * 10), 0, 0);
-  ms.scale(data.radius / 2);
+  ms.translate((data.distance), 0, 0);
+  ms.scale(data.radius);
 
   gl.useProgram(planet.program);
   gl.uniformMatrix4fv(planet.uniforms.MV, false, flatten(ms.current()));
@@ -198,12 +198,12 @@ function render() {
 
   ms.push();
   ms.rotate((time / data.year), [0, 0, 1]);
-  ms.translate((data.distance * 10), 0, 0);
+  ms.translate((data.distance), 0, 0);
 
   ms.push();  // Moon
 
   ms.rotate(((data.year * 365) * time), [0, 0, 1]);
-  ms.scale(data.radius / 2);
+  ms.scale(data.radius);
 
   gl.useProgram(planet.program);
   gl.uniformMatrix4fv(planet.uniforms.MV, false, flatten(ms.current()));
@@ -223,7 +223,7 @@ function render() {
 
   ms.rotate(((data.year * 365) * time), [0, 0, 1]); // Rotate around Earth
   ms.translate((data.distance * 500), 0, 0); // Distance from Earth x500, otherwise the Moon would be behind the Earth
-  ms.scale(data.radius / 2);
+  ms.scale(data.radius);
 
   gl.useProgram(planet.program);
   gl.uniformMatrix4fv(planet.uniforms.MV, false, flatten(ms.current()));
@@ -243,8 +243,8 @@ function render() {
 
   ms.push();
   ms.rotate((time / data.year), [0, 0, 1]);
-  ms.translate((data.distance * 10), 0, 0);
-  ms.scale(data.radius / 2);
+  ms.translate((data.distance), 0, 0);
+  ms.scale(data.radius);
 
   gl.useProgram(planet.program);
   gl.uniformMatrix4fv(planet.uniforms.MV, false, flatten(ms.current()));
@@ -264,8 +264,8 @@ function render() {
 
   ms.push();
   ms.rotate((time / data.year), [0, 0, 1]);
-  ms.translate((data.distance * 10), 0, 0);
-  ms.scale(data.radius / 2);
+  ms.translate((data.distance), 0, 0);
+  ms.scale(data.radius);
 
   gl.useProgram(planet.program);
   gl.uniformMatrix4fv(planet.uniforms.MV, false, flatten(ms.current()));
@@ -285,8 +285,8 @@ function render() {
 
   ms.push();
   ms.rotate((time / data.year), [0, 0, 1]);
-  ms.translate((data.distance * 10), 0, 0);
-  ms.scale(data.radius / 2);
+  ms.translate((data.distance), 0, 0);
+  ms.scale(data.radius);
 
   gl.useProgram(planet.program);
   gl.uniformMatrix4fv(planet.uniforms.MV, false, flatten(ms.current()));
@@ -306,8 +306,8 @@ function render() {
 
   ms.push();
   ms.rotate((time / data.year), [0, 0, 1]);
-  ms.translate((data.distance * 10), 0, 0);
-  ms.scale(data.radius / 2);
+  ms.translate((data.distance), 0, 0);
+  ms.scale(data.radius);
 
   gl.useProgram(planet.program);
   gl.uniformMatrix4fv(planet.uniforms.MV, false, flatten(ms.current()));
@@ -327,8 +327,8 @@ function render() {
 
   ms.push();
   ms.rotate((time / data.year), [0, 0, 1]);
-  ms.translate((data.distance * 10), 0, 0);
-  ms.scale(data.radius / 2);
+  ms.translate((data.distance), 0, 0);
+  ms.scale(data.radius);
 
   gl.useProgram(planet.program);
   gl.uniformMatrix4fv(planet.uniforms.MV, false, flatten(ms.current()));
@@ -348,8 +348,8 @@ function render() {
 
   ms.push();
   ms.rotate((time / data.year), [0, 0, 1]);
-  ms.translate((data.distance * 10), 0, 0);
-  ms.scale(data.radius / 2);
+  ms.translate((data.distance), 0, 0);
+  ms.scale(data.radius);
 
   gl.useProgram(planet.program);
   gl.uniformMatrix4fv(planet.uniforms.MV, false, flatten(ms.current()));
@@ -373,7 +373,7 @@ function resize() {
 
   gl.viewport(0, 0, w, h);
 
-  var fovy = 100.0; // degrees
+  var fovy = 120.0; // degrees
   var aspect = w / h;
 
   P = perspective(fovy, aspect, near, far);
