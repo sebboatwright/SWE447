@@ -15,7 +15,7 @@ function init() {
   gl.clearColor( 0.8, 0.8, 0.8, 1.0 );
   gl.enable( gl.DEPTH_TEST );
 
-  cube = new Cube();
+  cube = new Cube("Cube-vertex-shader", "Cube-fragment-shader");
 
   render();
 }
