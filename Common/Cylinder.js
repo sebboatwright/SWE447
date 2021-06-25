@@ -1,10 +1,10 @@
 //
-//  Sphere.js
+//  Cylinder.js
 //
 
 "use strict";
 
-function Sphere( slices, stacks, vertexShader, fragmentShader ) { 
+function Cylinder( slices, stacks, vertexShader, fragmentShader ) { 
     var i, j;  // loop counters
 
     var program = initShaders(gl,
@@ -14,7 +14,7 @@ function Sphere( slices, stacks, vertexShader, fragmentShader ) {
     var nSlices = slices || 20; // Default number of slices
     var nStacks = stacks || 12; // Default number of stacks
 
-    var dPhi = Math.PI / nStacks;
+    var dZ = 2.0 / (nStacks - 1);
     var dTheta = 2.0 * Math.PI / nSlices;
 
     var positions = [];
@@ -22,12 +22,10 @@ function Sphere( slices, stacks, vertexShader, fragmentShader ) {
     positions.push(0.0, 0.0, 1.0);
 
     for (j = 1; j < nStacks; ++j) {
-        var phi = j * dPhi;
-        var z = Math.cos(phi);
+        var z = 1.0 - (j * dZ);
 
         for (i = 0; i < nSlices; ++i) {
             var theta = i * dTheta;
-            var sinPhi = Math.sin(phi);
             var x = Math.cos(theta) * sinPhi;
             var y = Math.sin(theta) * sinPhi;
 
@@ -55,6 +53,7 @@ function Sphere( slices, stacks, vertexShader, fragmentShader ) {
     var m;  // 
     
     indices.push(0);
+
     for (i = 0; i < nSlices; ++i) {
         m = n + i;
         indices.push(n + i);
@@ -71,7 +70,7 @@ function Sphere( slices, stacks, vertexShader, fragmentShader ) {
     start = indices.length;
     offset = start * 2 /* sizeof(gl.UNSIGNED_SHORT) */ ;
 
-    for (j = 0; j < nStacks - 2; ++j) {
+    for (j = 0; j < nStacks - 1; ++j) {
         for (i = 0; i < nSlices; ++i) {
             m = n + i;
             indices.push(m);
@@ -113,18 +112,14 @@ function Sphere( slices, stacks, vertexShader, fragmentShader ) {
     };
 
     gl.bindBuffer(gl.ARRAY_BUFFER, vPosition.buffer);
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(positions),
-        gl.STATIC_DRAW);
-
-    gl.enableVertexAttribArray(vPosition.location);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(positions), gl.STATIC_DRAW);
 
     var elementArray = {
         buffer: gl.createBuffer()
     };
 
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, elementArray.buffer);
-    gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(indices),
-        gl.STATIC_DRAW);
+    gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(indices), gl.STATIC_DRAW);
 
     // Initialize our externally viewable variables
     this.PointMode = false;
@@ -134,9 +129,9 @@ function Sphere( slices, stacks, vertexShader, fragmentShader ) {
 
         gl.useProgram(program);
 
+        gl.enableVertexAttribArray(vPosition.location);
         gl.bindBuffer(gl.ARRAY_BUFFER, vPosition.buffer);
-        gl.vertexAttribPointer(vPosition.location, vPosition.numComponents,
-            gl.FLOAT, gl.FALSE, 0, 0);
+        gl.vertexAttribPointer(vPosition.location, vPosition.numComponents, gl.FLOAT, gl.FALSE, 0, 0);
 
         gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, elementArray.buffer);
 
@@ -144,8 +139,7 @@ function Sphere( slices, stacks, vertexShader, fragmentShader ) {
         // each set of parameters for the gl.drawElements call
         for (i = 0; i < drawCalls.length; ++i ) {
             var p = drawCalls[i];
-            gl.drawElements(this.PointMode ? gl.POINTS : p.type,
-                p.count, gl.UNSIGNED_SHORT, p.offset);
+            gl.drawElements(this.PointMode ? gl.POINTS : p.type, p.count, gl.UNSIGNED_SHORT, p.offset);
         }
     };
 };

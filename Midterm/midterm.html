@@ -1,1 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <script src="../Common/webgl-utils.js"></script>
+  <script src="../Common/initShaders.js"></script>
+  <script src="../Common/MV.js"></script>
+  <script src="../Common/MatrixStack.js"></script>  
+  <script src="../Common/Sphere.js"></script>
+  <script src="../Common/Cylinder.js"></script>
+  <script src="midterm-background.js"></script>
+  <script src="midterm-objects.js"></script>
+  <script src="midterm-render.js"></script>
 
+  <script type="x-shader/x-vertex" id="object-vertex-shader">
+    attribute vec4  vPosition;
+
+    uniform mat4  MV;
+    uniform mat4  P;
+
+    void main() {
+      gl_Position = P * MV * vPosition;
+    }
+  </script>
+
+  <script type="x-shader/x-fragment" id="object-fragment-shader">
+    precision highp float;
+  
+    uniform vec4 color;
+
+    void main() {
+      gl_FragColor = color;
+    }
+  </script>
+
+
+  <script type="x-shader/x-vertex" id="texture-vertex-shader">
+    attribute vec4 vPosition;
+    attribute vec2 vTexCoord;
+
+    varying vec2 fTexCoord;
+  
+    uniform mat4  MV;
+    uniform mat4  P;
+  
+    void main() {
+
+      gl_Position = P * MV * vPosition;
+      fTexCoord = vTexCoord; 
+    }
+  </script>
+
+  <script type="x-shader/x-fragment" id="texture-fragment-shader">
+    precision highp float;
+
+    varying vec2 fTexCoord;
+    
+    uniform sampler2D uSampler;
+    
+    void main() {
+      gl_FragColor = texture2D(uSampler, fTexCoord); 
+    }
+  </script>
+</head>
+
+<body>
+  <canvas id="webgl-canvas" width="900" height="700"></canvas>
+</body>
+</html>
