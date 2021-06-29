@@ -1,7 +1,6 @@
 "use strict";
 
-function BG( source, vertexShader, fragmentShader )
-{	
+function BG( source, vertexShader, fragmentShader ) {	
     var program = initShaders(gl, vertexShader || "texture-vertex-shader", fragmentShader || "texture-fragment-shader");
 
 	var uTexture = {

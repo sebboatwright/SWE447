@@ -65,14 +65,9 @@ function render() {
   V = translate(0.0, 0.0, -0.5*(near + far));
   ms.load(V);  
 
-  //drawBG();
-  
-  drawSpheres(Spheres["Tire"], ms);
-  drawSpheres(Spheres["Wheel"], ms);
-  drawSpheres(Spheres["Center"], ms);
-
-  drawCylinders(Cylinders["Spoke1"], ms);
-  drawCylinders(Cylinders["Spoke2"], ms);
+  drawBG(BGs[name], ms);
+  drawSpheres(Spheres[name], ms);
+  drawCylinders(Cylinders[name], ms);
 
   window.requestAnimationFrame(render);
 }
@@ -275,7 +270,7 @@ function drawCylinders(data, ms, pointMode) {
   ms.pop();
 
 
-  name = "Spoke6";
+  name = "Spoke8";
   cylinder = Cylinders[name];
 
   cylinder.model.PointMode = false;
@@ -295,23 +290,25 @@ function drawCylinders(data, ms, pointMode) {
   ms.pop();
 }
 
-function drawBG() {
+function drawBG(data, ms) {
   var name, back, data;
 
   name = "Background";
   back = BGs[name];
-  data = Objects[name];
+
+  back.model.PointMode = false;
 
   ms.push();
-  ms.rotate((time / 1) * 2, [0, 0, 1]);
-
-  gl.useProgram(back.program);
-  gl.uniformMatrix4fv(back.uniforms.MV, false, flatten(ms.current()));
-	gl.uniformMatrix4fv(back.uniforms.P, false, flatten(P));
-	gl.uniform1i(back.uniforms.texture, 0);
-  back.render();
+  ms.rotate(180, [0, 0, 1]);
+  ms.scale(70, 70, 1);
+  ms.translate(0, 0, -20);
+  gl.useProgram(back.model.program);
+  gl.uniformMatrix4fv(back.model.uniforms.MV, false, flatten(ms.current()));
+	gl.uniformMatrix4fv(back.model.uniforms.P, false, flatten(P));
+	gl.uniform1i(back.model.uniforms.texture, 0);
+  back.model.render();
   ms.pop();
-}
+} 
 
 function resize() {
   var w = canvas.clientWidth;
