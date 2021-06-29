@@ -293,15 +293,37 @@ function drawCylinders(data, ms, pointMode) {
 function drawBG(data, ms) {
   var name, back, data;
 
-  name = "Background";
+  name = "Background1";
   back = BGs[name];
 
   back.model.PointMode = false;
 
   ms.push();
   ms.rotate(180, [0, 0, 1]);
+  ms.translate(135 - time, 0, -20);
+  if (time == 140) {
+    time = 0;
+  }
   ms.scale(70, 70, 1);
-  ms.translate(0, 0, -20);
+  gl.useProgram(back.model.program);
+  gl.uniformMatrix4fv(back.model.uniforms.MV, false, flatten(ms.current()));
+	gl.uniformMatrix4fv(back.model.uniforms.P, false, flatten(P));
+	gl.uniform1i(back.model.uniforms.texture, 0);
+  back.model.render();
+  ms.pop();
+
+  name = "Background2";
+  back = BGs[name];
+
+  back.model.PointMode = false;
+
+  ms.push();
+  ms.rotate(180, [0, 0, 1]);
+  ms.translate(-5 - time, 0, -20);
+  if (time == 140) {
+    time = 0;
+  }
+  ms.scale(70, 70, 1);
   gl.useProgram(back.model.program);
   gl.uniformMatrix4fv(back.model.uniforms.MV, false, flatten(ms.current()));
 	gl.uniformMatrix4fv(back.model.uniforms.P, false, flatten(P));

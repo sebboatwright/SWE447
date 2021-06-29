@@ -82,7 +82,13 @@ var Cylinders = {
 };
 
 var BGs = {
-    Background : {
+    Background1 : {
+        model : undefined,
+        distance : 10,
+        source : img,
+    },
+
+    Background2 : {
         model : undefined,
         distance : 10,
         source : img,
