@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="utf-8">
-		<title>My first three.js app</title>
+		<meta charset="UTF-8">
+
 		<style>
-			body { margin: 0; }
+			html, body {
+			margin: 0;
+			height: 100%;
+			}
 		</style>
+
+		<script type="module" src="render.js"></script>
 	</head>
+
 	<body>
-		<script src="../Common/three.js"></script>
-    <script src="render.js"></script>
+		<canvas id="webgl-canvas" width="1200" height="800"></canvas>
 	</body>
 </html>
