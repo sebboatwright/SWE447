@@ -297,7 +297,7 @@ function main() {
     ceilLampGeo.traverse(function(child) {
       child.receiveShadow = true;
       child.castShadow = true;
-      child.shadowDarkness = .5;
+      child.shadowDarkness = .8;
       child.needsUpdate = true;
     });
 
@@ -456,7 +456,7 @@ function addShadows(mesh, meshChild, meshMat) {
 
     meshChild.castShadow = true;
     meshChild.receiveShadow = true;
-    meshChild.shadowDarkness = .5;
+    meshChild.shadowDarkness = .8;
     meshChild.needsUpdate = true;
   });
 
